@@ -1,22 +1,27 @@
 <?php
 
-	require_once 'src/Class.php';
+    /**
+    * @backupGlobals disabled
+    * @backupStaticAttributes disabled
+    */
 
-	class ClassTest extends PHPUnit_Framework_TestCase
-	{
+    require_once "src/Student.php";
+    require_once "src/Course.php";
 
-		function test_makeTitleCase_oneWord()
-		{
-		//Arrange
-		$test_TitleCaseGenerator = new TitleCaseGenerator;
-		$input = 'beowulf';
+    $server = 'mysql:host=localhost;dbname=registrar_test';
+    $username = 'root';
+    $password = 'root';
+    $DB = new PDO($server, $username, $password);
 
-		//Act
-		$result = $test_TitleCaseGenerator->makeTitleCase($input);
+    class StudentTest extends PHPUnit_Framework_TestCase
+    {
 
-		//Assert
-		$this->assertEquals('Beowulf', $result);
-		}
-	}
+        protected function tearDown()
+        {
+            Student::deleteAll();
+            Course::deleteAll();
+        }
 
+
+    }
 ?>
