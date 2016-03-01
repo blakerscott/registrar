@@ -99,7 +99,14 @@
           array_push($students, $new_student);
       }
       return $students;
-    }
+    } 
+
+		function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM students_courses WHERE course_id = {$this->getId()};");
+        }
+
 
 	}
  ?>

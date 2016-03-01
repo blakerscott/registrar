@@ -150,6 +150,57 @@
             $this->assertEquals($test_student, $result);
         }
 
+        function test_addCourse()
+        {
+            //Arrange
+            $course_name = "Economics";
+            $id = null;
+						$course_num = 101;
+            $test_course = new Course($id, $course_name, $course_num);
+            $test_course->save();
+
+            $name = "Bill";
+						$id2 = null;
+            $add_date = "2016-04-29";
+            $test_student = new Student($id2, $name, $add_date);
+            $test_student->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+
+            //Assert
+            $this->assertEquals($test_student->getCourses(), [$test_course]);
+        }
+
+        function test_getCourses()
+        {
+            //Arrange
+            $course_name = "Economics";
+            $id = 1;
+						$course_num = 101;
+            $test_course = new Course($id, $course_name, $course_num);
+            $test_course->save();
+
+            $course_name2 = "Math";
+            $id2 = 2;
+						$course_num2 = 101;
+            $test_course2 = new Course($id2, $course_name2, $course_num2);
+            $test_course2->save();
+
+            $name = "Bill";
+						$id3 = 3;
+            $add_date = "2016-04-29";
+            $test_student = new Student($id3, $name, $add_date);
+            $test_student->save();
+
+            //Act
+            $test_student->addCourse($test_course);
+            $test_student->addCourse($test_course2);
+
+            //Assert
+            $this->assertEquals($test_student->getCourses(), [$test_course, $test_course2]);
+        }
+
 
     }
 ?>
