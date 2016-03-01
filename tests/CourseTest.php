@@ -45,6 +45,7 @@
             $this->assertEquals(true, is_numeric($result));
         }
 
+
         function test_save()
         {
             $course_name = "Economics";
@@ -111,6 +112,57 @@
             $result = Course::find($test_course->getId());
 
             $this->assertEquals($test_course, $result);
+        }
+
+        function testAddStudent()
+        {
+            //Arrange
+            $course_name = "Economics";
+            $id = 1;
+            $course_num = 101;
+            $test_course = new Course($id, $course_name, $course_num);
+            $test_course->save();
+
+            $name = "Mike Brivel";
+						$id2 = null;
+            $add_date = "2016-03-29";
+            $test_student = new Student($id2, $name, $add_date);
+            $test_student->save();
+
+            //Act
+            $test_course->addStudent($test_student);
+
+            //Assert
+            $this->assertEquals($test_course->getStudents(), [$test_student]);
+        }
+
+        function testGetStudents()
+        {
+            //Arrange
+            $course_name = "Economics";
+            $id = 1;
+            $course_num = 101;
+            $test_course = new Course($id, $course_name, $course_num);
+            $test_course->save();
+
+            $name = "Mike Brivel";
+            $id2 = null;
+            $add_date = "2016-03-29";
+            $test_student = new Student($id2, $name, $add_date);
+            $test_student->save();
+
+            $name2 = "Charles Xavier";
+            $id3 = null;
+            $add_date2 = "2016-03-29";
+            $test_student2 = new Student($id3, $name2, $add_date2);
+            $test_student2->save();
+
+            //Act
+            $test_course->addStudent($test_student);
+            $test_course->addStudent($test_student2);
+
+            //Assert
+            $this->assertEquals([$test_student, $test_student2], $test_course->getStudents());
         }
 
 
