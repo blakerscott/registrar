@@ -48,7 +48,8 @@
 			{
 					$returned_students = $GLOBALS['DB']->query("SELECT * FROM students;");
 					$students = array();
-					foreach($returned_students as $student) {
+					foreach($returned_students as $student)
+					{
 							$name = $student['name'];
 							$id = $student['id'];
 							$add_date = $student['add_date'];

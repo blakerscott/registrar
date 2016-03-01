@@ -32,8 +32,9 @@
             $test_course->save();
 
             $name = "Mike Brivel";
+						$id2 = null;
             $add_date = "2016-03-29";
-            $test_student = new Student($id, $name, $add_date);
+            $test_student = new Student($id2, $name, $add_date);
             $test_student->save();
 
             //Act
@@ -74,22 +75,21 @@
         {
             //Arrange
 						$course_name = "Economics";
-            $id = null;
+						$id = null;
 						$course_num = 101;
             $test_course = new Course($id, $course_name, $course_num);
             $test_course->save();
 
 						$name = "Mike Brivel";
-						$id2 = null;
             $add_date = "2016-03-29";
+						$id2 = null;
             $test_student = new Student($id2, $name, $add_date);
             $test_student->save();
 
             //Act
-            $test_student->save();
+            $result = Student::getAll();
 
             //Assert
-            $result = Student::getAll();
             $this->assertEquals($test_student, $result[0]);
         }
 
@@ -144,10 +144,10 @@
             $test_student2->save();
 
             //Act
-            $result = Student::find($test_task->getId());
+            $result = Student::find($test_student->getId());
 
             //Assert
-            $this->assertEquals($test_task, $result);
+            $this->assertEquals($test_student, $result);
         }
 
 
